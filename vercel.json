@@ -1,1 +1,33 @@
+{
+  "version": 2,
+  "functions": {
+    "api/stripeWebhook.js": {
+      "runtime": "nodejs18.x",
+      "maxDuration": 10,
+      "memory": 128,
+      "includeFiles": [
+        "api/utils/**"
+      ]
+    },
+    "api/*.js": {
+      "runtime": "nodejs18.x",
+      "maxDuration": 10,
+      "memory": 128
+    }
+  },
+  "routes": [
+    {
+      "src": "/api/stripeWebhook",
+      "dest": "/api/stripeWebhook.js",
+      "methods": ["POST"],
+      "headers": {
+        "Content-Type": "application/json"
+      }
+    },
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/$1.js"
+    }
+  ]
+}
 
